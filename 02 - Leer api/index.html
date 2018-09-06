@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+        crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+</head>
+
+<body>
+    <div class="container my-5 text-center">
+        <button class="btn btn-danger w-100" onclick="traer()">Obtener</button>
+        <div class="mt-5" id="contenido">
+            
+        </div>
+    </div>
+
+    <script>
+        var contenido = document.querySelector('#contenido')
+        function traer() {
+            //Colocamos la URL de la api a usar
+            fetch('https://randomuser.me/api/')
+            //Nos trae una promesa con una respuesta con datos de tipo JSON
+            .then(res => res.json())
+            .then(data => {
+                console.log(data.results['0'])
+                contenido.innerHTML = `
+                <!-- Aqui colocamos la imagen con formato de bootstrap imagen en circulo -->
+                <img src="${data.results['0'].picture.large}" width="100px" class="img-fluid rounded-circle"> 
+                <!-- Aqui colocamos el campo nombre del arreglo de la obtendo de la api -->
+                <p>Nombre: ${data.results['0'].name.last}</p>
+                `
+            })
+        } 
+    </script>
+
+
+</body>
+
+</html>
